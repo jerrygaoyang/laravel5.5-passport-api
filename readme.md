@@ -94,6 +94,7 @@
 
 ```json
 {
+    "user_name": "jerry",             //该参数可选,若无则默认等于account
     "account": "18656660@163.com",    //手机或邮箱
     "password": "123456",
     "code": 1234
