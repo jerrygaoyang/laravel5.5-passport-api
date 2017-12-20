@@ -1,12 +1,18 @@
-# laravel passport api 
+# laravel passport api auth
 
 ### 使用说明
+
+> git clone https://github.com/jerrygaoyang/laravel5.5-passport-api.git
+
+> cd laravel5.5-passport-api
 
 > cp .env.example .env    (配置好数据库,以及APP_URL)
 
 > composer install 
 
 > php artisan key:generate
+
+> php artisan migrate
 
 > php artisan passport:install
 
@@ -22,7 +28,7 @@
 ```json
 {
     "account": "18888888888",   //手机或邮箱
-    "password": "123456"        //密码
+    "password": "123456"        
 }
 ```
 
@@ -78,7 +84,7 @@
 
 ```json
 {
-    "account": "18656660@163.com",
+    "account": "18656660@163.com",    //手机或邮箱
     "password": "123456",
     "code": 1234
 }
