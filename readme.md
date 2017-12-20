@@ -1,5 +1,15 @@
 # laravel passport api auth
 
+### 说明
+
+* 基于 passport 封装的 login, logout, register, refresh_token, verify_code
+
+* 以上接口逻辑你都不需要再去管理
+
+* app/Http/Controllers/Api/AuthenticateController 中 verify_code 方法添加对应的手机和邮箱发送接口调用
+
+* 以上 auth 接口同时支持手机和邮箱
+
 ### 使用说明
 
 > git clone https://github.com/jerrygaoyang/laravel5.5-passport-api.git
