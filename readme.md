@@ -139,7 +139,7 @@
 ```
 
 
-##### 退出登录
+##### 退出登录，并销毁token 
 
 > POST /api/auth/logout
 
