@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Api\ApiException;
 use App\Helpers\Api\ApiResponse;
 use App\Models\User;
+use App\Models\UserMessage;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,9 +30,12 @@ class AuthenticateController extends Controller
      */
     public function login(Request $request)
     {
+        //获取校验账号对应参数
+        $account = $this->username($request);
+
         //字段合法校验
         $validator = Validator::make($request->all(), [
-            $this->username() => 'required|exists:users',
+            $account => 'required|exists:users',
             'password' => 'required|between:6,16',
         ]);
         if ($validator->fails()) {
@@ -39,7 +44,7 @@ class AuthenticateController extends Controller
 
         //账号密码校验
         if (!$this->attemptLogin($request)) {
-            return $this->failed($this->username() . ' or password is invalid');
+            return $this->failed($this->username($request) . ' or password is invalid');
         }
 
         //密码授权获取Token
@@ -51,10 +56,11 @@ class AuthenticateController extends Controller
      *
      * @param Request $request
      * @return array
+     * @throws ApiException
      */
     public function credentials(Request $request)
     {
-        return $request->only([$this->username(), 'password']);
+        return $request->only([$this->username($request), 'password']);
     }
 
     /**
@@ -62,6 +68,7 @@ class AuthenticateController extends Controller
      *
      * @param Request $request
      * @return mixed
+     * @throws ApiException
      */
     protected function attemptLogin(Request $request)
     {
@@ -71,11 +78,34 @@ class AuthenticateController extends Controller
     /**
      * 账号校验字段设置
      *
+     * @param Request $request
      * @return string
+     * @throws ApiException
      */
-    public function username()
+    public function username(Request $request)
     {
-        return 'phone';
+        //校验请求参数是否包含account
+        if (!$request->has('account')) {
+            throw new ApiException('lack param account');
+        }
+        $account = $request->post('account');
+
+        //手机/邮箱正则表达式
+        $phone_pattern = '/^1[0-9]{10}$/';
+        $email_pattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/';
+
+        //校验account为手机/邮箱
+        if (preg_match($phone_pattern, $account)) {
+            //并将phone添加到request参数中,并返回校验账号对应参数
+            $request->request->add(['phone' => $account]);
+            return 'phone';
+        } else if (preg_match($email_pattern, $account)) {
+            //并将email添加到request参数中,并返回校验账号对应参数
+            $request->request->add(['email' => $account]);
+            return 'email';
+        } else {
+            throw new ApiException('the account param is not phone or email');
+        }
     }
 
     /**
@@ -98,19 +128,39 @@ class AuthenticateController extends Controller
      */
     public function register(Request $request)
     {
+        //获取校验账号对应参数
+        $account = $this->username($request);
+
+        //获取该账号数据库存储的验证码
+        $code = 1234;
+
         //字段合法校验
         $validator = Validator::make($request->all(), [
-            $this->username() => 'required|exists:users',
-            'password' => 'required|between:6,16'
+            $account => 'required|unique:users',
+            'password' => 'required|between:6,16',
+            'code' => 'required|in:' . $code
         ]);
         if ($validator->fails()) {
-            return $this->failed($validator->errors());
+            return $this->failed($validator->errors($request));
         }
 
-        $data = $request->only(['name', 'password', $this->username()]);
+        //存储users表
+        $data = $request->only(['password', $this->username($request)]);
         $data['password'] = bcrypt($data['password']);
-        User::create($data);
+        $user = User::create($data);
 
+        //同步用户信息到user_message
+        $user_name = $request->post($this->username($request));
+        if ($request->has('user_name')) {
+            $user_name = $request->post('user_name');
+        }
+        $data = [
+            'user_name' => $user_name,
+            'user_id' => $user->id
+        ];
+        UserMessage::create($data);
+
+        //生成token
         return $this->login($request);
     }
 }

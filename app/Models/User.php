@@ -30,25 +30,28 @@ class User extends Authenticatable
 
 
     /**
-     * passport token 校验账号根据手机字段校验
+     * passport token 校验账号根据手机或邮箱字段校验
      *
      * @param $username
      * @return mixed
      */
     public function findForPassport($username)
     {
-        return $this->where('phone', $username)->first();
+        return $this->where('phone', $username)->orWhere('email', $username)->first();
     }
-
 
     /**
      * passport token 中 client id 和 secret 设置
      *
      * @return array
+     * @throws ApiException
      */
     public static function oauth_client()
     {
         $oauth_client = OauthClient::query()->orderByDesc('id')->first();
+        if (!$oauth_client) {
+            throw new ApiException('服务器缺少oauth_client');
+        }
         return [
             'client_id' => $oauth_client->id,
             'client_secret' => $oauth_client->secret
@@ -72,7 +75,7 @@ class User extends Authenticatable
                     'grant_type' => 'password',
                     'client_id' => self::oauth_client()['client_id'],
                     'client_secret' => self::oauth_client()['client_secret'],
-                    'username' => $request->post('phone'),
+                    'username' => $request->post('account'),
                     'password' => $request->post('password'),
                     'scope' => ''
                 ]
