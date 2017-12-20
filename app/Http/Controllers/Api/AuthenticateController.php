@@ -6,9 +6,11 @@ use App\Helpers\Api\ApiException;
 use App\Helpers\Api\ApiResponse;
 use App\Models\User;
 use App\Models\UserMessage;
+use App\Models\VerifyCode;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -132,7 +134,14 @@ class AuthenticateController extends Controller
         $account = $this->username($request);
 
         //获取该账号数据库存储的验证码
-        $code = 1234;
+        $verify_code = VerifyCode::where('account', $request->post($account))
+            ->where('expires_at', '>', Carbon::now())
+            ->where('revoked', '!=', 1)
+            ->first();
+        if (!$verify_code) {
+            throw new ApiException('invalid code');
+        }
+        $code = $verify_code->code;
 
         //字段合法校验
         $validator = Validator::make($request->all(), [
@@ -143,6 +152,10 @@ class AuthenticateController extends Controller
         if ($validator->fails()) {
             return $this->failed($validator->errors($request));
         }
+
+        //将验证码更新为无效
+        $verify_code->revoked = 1;
+        $verify_code->save();
 
         //存储users表
         $data = $request->only(['password', $this->username($request)]);
@@ -162,5 +175,42 @@ class AuthenticateController extends Controller
 
         //生成token
         return $this->login($request);
+    }
+
+    //发送验证码
+    public function verify_code(Request $request)
+    {
+        //获取校验账号对应参数
+        $account = $this->username($request);
+
+        //生成验证码
+//        $code = rand(100000, 999999);
+        $code = 1234;
+
+        //根据账号类型来发送验证码到手机短信或邮件
+        if ($account == 'phone') {
+            //发送手机短信
+            $callback = 1;
+            if (!$callback) {
+                throw new ApiException('发送失败');
+            }
+        } else {
+            //发送邮件
+            $callback = 1;
+            if (!$callback) {
+                throw new ApiException('发送失败');
+            }
+        }
+
+        //将验证码存储到verify_code表
+        $data = [
+            'code' => $code,
+            'account' => $request->post($account),
+            'category' => $account,
+            'expires_at' => Carbon::now()->addMinutes(15)
+        ];
+        VerifyCode::create($data);
+
+        return $this->success();
     }
 }

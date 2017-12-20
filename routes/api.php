@@ -20,4 +20,5 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::post('logout', 'AuthenticateController@logout');
     Route::post('register', 'AuthenticateController@register');
     Route::post('refresh_token', 'AuthenticateController@refresh_token');
+    Route::post('verify_code', 'AuthenticateController@verify_code');
 });
