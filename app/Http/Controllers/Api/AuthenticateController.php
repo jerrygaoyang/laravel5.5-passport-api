@@ -50,7 +50,7 @@ class AuthenticateController extends Controller
         }
 
         //密码授权获取Token
-        return $this->success(User::access_token($request));
+        return $this->success(User::password_token($request));
     }
 
     /**
@@ -133,22 +133,34 @@ class AuthenticateController extends Controller
         //获取校验账号对应参数
         $account = $this->username($request);
 
-        //获取该账号数据库存储的验证码对象
-        $verify_code = $this->get_verify_code($request);
-
         //字段合法校验
         $validator = Validator::make($request->all(), [
             $account => 'required|unique:users',
-            'password' => 'required|between:6,16',
-            'code' => 'required|in:' . $verify_code->code
+            'password' => 'required|between:6,16'
         ]);
         if ($validator->fails()) {
             return $this->failed($validator->errors());
         }
 
-        //将验证码更新为无效
-        $this->revoke_verify_code($verify_code);
+        //校验验证码
+        $this->check_verify_code($request);
 
+        //同步数据库添加用户
+        $this->create_user($request);
+
+        //生成token
+        return $this->login($request);
+    }
+
+    /**
+     * 添加用户信息到 users 和 user_message 表
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws ApiException
+     */
+    public function create_user(Request $request)
+    {
         //存储users表
         $data = $request->only(['password', $this->username($request)]);
         $data['password'] = bcrypt($data['password']);
@@ -165,8 +177,41 @@ class AuthenticateController extends Controller
         ];
         UserMessage::create($data);
 
-        //生成token
-        return $this->login($request);
+        return $user;
+    }
+
+    /**
+     * 刷新 token
+     *
+     * @param Request $request
+     * @return $this
+     * @throws ApiException
+     */
+    public function refresh_token(Request $request)
+    {
+        return $this->success(User::refresh_token($request));
+    }
+
+    /**
+     * 根据账号和验证码快捷登陆
+     *
+     * @param Request $request
+     * @return AuthenticateController
+     * @throws ApiException
+     */
+    public function fast_login(Request $request)
+    {
+        //校验验证码
+        $this->check_verify_code($request);
+
+        //判断该用户是否已注册, 未注册则添加用户
+        $user = User::where($this->username($request), $request->post($this->username($request)))->first();
+        if (!$user) {
+            $user = $this->create_user($request);
+        }
+
+        //分配个人令牌
+        return $this->success(User::personal_token($user));
     }
 
     /**
@@ -181,21 +226,17 @@ class AuthenticateController extends Controller
         //获取校验账号对应参数
         $account = $this->username($request);
 
-        //获取该账号数据库存储的验证码对象
-        $verify_code = $this->get_verify_code($request);
-
         //字段合法校验
         $validator = Validator::make($request->all(), [
             $account => 'required|exists:users',
-            'password' => 'required|between:6,16',
-            'code' => 'required|in:' . $verify_code->code
+            'password' => 'required|between:6,16'
         ]);
         if ($validator->fails()) {
             return $this->failed($validator->errors());
         }
 
-        //将验证码更新为无效
-        $this->revoke_verify_code($verify_code);
+        //校验验证码
+        $this->check_verify_code($request);
 
         //更新该账号密码
         User::where($account, $request->post('account'))
@@ -208,37 +249,36 @@ class AuthenticateController extends Controller
     }
 
     /**
-     * 从数据库获取验证码，返回验证码对象
+     * 校验验证码
      *
      * @param Request $request
-     * @return mixed
      * @throws ApiException
      */
-    public function get_verify_code(Request $request)
+    public function check_verify_code(Request $request)
     {
         //获取校验账号对应参数
         $account = $this->username($request);
 
+        if (!$request->has('code')) {
+            throw new ApiException('lack param code');
+        }
+        $code = $request->post('code');
+
         //获取该账号数据库存储的验证码
         $verify_code = VerifyCode::where('account', $request->post($account))
+            ->where('code', $code)
             ->where('expires_at', '>', Carbon::now())
             ->where('revoked', '!=', 1)
             ->first();
         if (!$verify_code) {
             throw new ApiException('invalid code');
         }
-        return $verify_code;
-    }
 
-    /**
-     * 废弃已使用的验证码
-     *
-     * @param $verify_code
-     */
-    public function revoke_verify_code($verify_code)
-    {
-        $verify_code->revoked = 1;
-        $verify_code->save();
+        /**
+         * 若需求要求验证码一次有效,直接将下面代码注释一处即可
+         */
+        //$verify_code->revoked = 1;
+        //$verify_code->save();
     }
 
     /**
@@ -297,4 +337,5 @@ class AuthenticateController extends Controller
 
         return $this->success();
     }
+
 }

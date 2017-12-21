@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client as HttpClient;
+use Laravel\Passport\PersonalAccessTokenFactory;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,6 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::post('verify_code', 'AuthenticateController@verify_code');
     Route::post('refresh_token', 'AuthenticateController@refresh_token');
     Route::post('reset_password', 'AuthenticateController@reset_password');
+    Route::post('fast_login', 'AuthenticateController@fast_login');
 });
+

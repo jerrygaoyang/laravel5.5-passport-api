@@ -41,14 +41,17 @@ class User extends Authenticatable
     }
 
     /**
-     * passport token 中 client id 和 secret 设置
+     * passport password token 中 client id 和 secret 设置
      *
      * @return array
      * @throws ApiException
      */
-    public static function oauth_client()
+    public static function password_client()
     {
-        $oauth_client = OauthClient::query()->orderByDesc('id')->first();
+        $oauth_client = OauthClient::query()
+            ->where('password_client', 1)
+            ->orderByDesc('id')
+            ->first();
         if (!$oauth_client) {
             throw new ApiException('服务器缺少oauth_client');
         }
@@ -56,6 +59,53 @@ class User extends Authenticatable
             'client_id' => $oauth_client->id,
             'client_secret' => $oauth_client->secret
         ];
+    }
+
+    /**
+     * passport personal token 中 client id 和 secret 设置
+     *
+     * @return array
+     * @throws ApiException
+     */
+    public static function personal_client()
+    {
+        $oauth_client = OauthClient::query()
+            ->where('personal_access_client', 1)
+            ->orderByDesc('id')
+            ->first();
+        if (!$oauth_client) {
+            throw new ApiException('服务器缺少oauth_client');
+        }
+        return [
+            'client_id' => $oauth_client->id,
+            'client_secret' => $oauth_client->secret
+        ];
+    }
+
+    /**
+     * 个人授权获取 token
+     *
+     * @param $user
+     * @return mixed
+     * @throws ApiException
+     */
+    public static function personal_token($user)
+    {
+        $http = new HttpClient();
+        try {
+            $res = $http->post(env('APP_URL') . '/oauth/token', [
+                'json' => [
+                    'grant_type' => 'personal_access',
+                    'client_id' => self::personal_client()['client_id'],
+                    'client_secret' => self::personal_client()['client_secret'],
+                    'user_id' => $user->id,
+                    'scope' => '',
+                ]
+            ]);
+            return json_decode($res->getBody(), true);
+        } catch (ClientException $e) {
+            throw new ApiException($e->getMessage());
+        }
     }
 
 
@@ -66,15 +116,15 @@ class User extends Authenticatable
      * @return mixed
      * @throws ApiException
      */
-    public static function access_token(Request $request)
+    public static function password_token(Request $request)
     {
         $http = new HttpClient();
         try {
             $res = $http->post(env('APP_URL') . '/oauth/token', [
                 'json' => [
                     'grant_type' => 'password',
-                    'client_id' => self::oauth_client()['client_id'],
-                    'client_secret' => self::oauth_client()['client_secret'],
+                    'client_id' => self::password_client()['client_id'],
+                    'client_secret' => self::password_client()['client_secret'],
                     'username' => $request->post('account'),
                     'password' => $request->post('password'),
                     'scope' => ''
@@ -100,8 +150,8 @@ class User extends Authenticatable
             $res = $http->post(env('APP_URL') . '/oauth/token', [
                 'json' => [
                     'grant_type' => 'refresh_token',
-                    'client_id' => self::oauth_client()['client_id'],
-                    'client_secret' => self::oauth_client()['client_secret'],
+                    'client_id' => self::password_client()['client_id'],
+                    'client_secret' => self::password_client()['client_secret'],
                     'refresh_token' => $request->post('refresh_token'),
                     'scope' => ''
                 ]
@@ -111,6 +161,4 @@ class User extends Authenticatable
             throw new ApiException($e->getMessage());
         }
     }
-
-
 }
