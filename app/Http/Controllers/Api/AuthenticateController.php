@@ -195,6 +195,8 @@ class AuthenticateController extends Controller
     /**
      * 根据账号和验证码快捷登陆
      *
+     * 待完善...
+     *
      * @param Request $request
      * @return AuthenticateController
      * @throws ApiException
@@ -211,7 +213,9 @@ class AuthenticateController extends Controller
         }
 
         //分配个人令牌
-        return $this->success(User::personal_token($user));
+        $token = User::personal_token($user);
+        $token['refresh_token'] = '';
+        return $this->success($token);
     }
 
     /**
