@@ -133,29 +133,21 @@ class AuthenticateController extends Controller
         //获取校验账号对应参数
         $account = $this->username($request);
 
-        //获取该账号数据库存储的验证码
-        $verify_code = VerifyCode::where('account', $request->post($account))
-            ->where('expires_at', '>', Carbon::now())
-            ->where('revoked', '!=', 1)
-            ->first();
-        if (!$verify_code) {
-            throw new ApiException('invalid code');
-        }
-        $code = $verify_code->code;
+        //获取该账号数据库存储的验证码对象
+        $verify_code = $this->get_verify_code($request);
 
         //字段合法校验
         $validator = Validator::make($request->all(), [
             $account => 'required|unique:users',
             'password' => 'required|between:6,16',
-            'code' => 'required|in:' . $code
+            'code' => 'required|in:' . $verify_code->code
         ]);
         if ($validator->fails()) {
-            return $this->failed($validator->errors($request));
+            return $this->failed($validator->errors());
         }
 
         //将验证码更新为无效
-        $verify_code->revoked = 1;
-        $verify_code->save();
+        $this->revoke_verify_code($verify_code);
 
         //存储users表
         $data = $request->only(['password', $this->username($request)]);
@@ -177,32 +169,124 @@ class AuthenticateController extends Controller
         return $this->login($request);
     }
 
-    //发送验证码
+    /**
+     * 修改密码
+     *
+     * @param Request $request
+     * @return $this
+     * @throws ApiException
+     */
+    public function reset_password(Request $request)
+    {
+        //获取校验账号对应参数
+        $account = $this->username($request);
+
+        //获取该账号数据库存储的验证码对象
+        $verify_code = $this->get_verify_code($request);
+
+        //字段合法校验
+        $validator = Validator::make($request->all(), [
+            $account => 'required|exists:users',
+            'password' => 'required|between:6,16',
+            'code' => 'required|in:' . $verify_code->code
+        ]);
+        if ($validator->fails()) {
+            return $this->failed($validator->errors());
+        }
+
+        //将验证码更新为无效
+        $this->revoke_verify_code($verify_code);
+
+        //更新该账号密码
+        User::where($account, $request->post('account'))
+            ->update([
+                'password' => bcrypt($request->post('password'))
+            ]);
+
+        //生成token
+        return $this->login($request);
+    }
+
+    /**
+     * 从数据库获取验证码，返回验证码对象
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws ApiException
+     */
+    public function get_verify_code(Request $request)
+    {
+        //获取校验账号对应参数
+        $account = $this->username($request);
+
+        //获取该账号数据库存储的验证码
+        $verify_code = VerifyCode::where('account', $request->post($account))
+            ->where('expires_at', '>', Carbon::now())
+            ->where('revoked', '!=', 1)
+            ->first();
+        if (!$verify_code) {
+            throw new ApiException('invalid code');
+        }
+        return $verify_code;
+    }
+
+    /**
+     * 废弃已使用的验证码
+     *
+     * @param $verify_code
+     */
+    public function revoke_verify_code($verify_code)
+    {
+        $verify_code->revoked = 1;
+        $verify_code->save();
+    }
+
+    /**
+     * 手机或邮件发送验证码
+     *
+     * @param Request $request
+     * @return $this
+     * @throws ApiException
+     */
     public function verify_code(Request $request)
     {
         //获取校验账号对应参数
         $account = $this->username($request);
 
-        //生成验证码
-//        $code = rand(100000, 999999);
+        /**
+         * 生成验证码
+         * $code = rand(100000, 999999);
+         *
+         * 当前 $code = 1234, 用于测试
+         */
         $code = 1234;
 
         //根据账号类型来发送验证码到手机短信或邮件
         if ($account == 'phone') {
-            //发送手机短信
+            /**
+             * 发送手机短信验证码
+             *
+             * 此处添加自己调取自己的短信发送接口
+             * 根据发送回调判断是否发送成功
+             */
             $callback = 1;
             if (!$callback) {
                 throw new ApiException('发送失败');
             }
         } else {
-            //发送邮件
+            /**
+             * 发送邮件验证码
+             *
+             * 此处添加自己调取自己的邮件发送接口
+             * 根据发送回调判断是否发送成功
+             */
             $callback = 1;
             if (!$callback) {
                 throw new ApiException('发送失败');
             }
         }
 
-        //将验证码存储到verify_code表
+        //将验证码存储到verify_code表, 验证码有效期15分钟
         $data = [
             'code' => $code,
             'account' => $request->post($account),
