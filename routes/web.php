@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-
+    return view('home.index');
 });
 
 
-
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::get('login', 'AuthenticateController@showLoginForm');
     Route::post('login', 'AuthenticateController@login');
     Route::post('logout', 'AuthenticateController@logout');
     Route::post('verify_code', 'AuthenticateController@verify_code');
