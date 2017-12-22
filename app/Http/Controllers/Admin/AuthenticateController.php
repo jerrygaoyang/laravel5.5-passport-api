@@ -84,7 +84,7 @@ class AuthenticateController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/admin/login');
+        return redirect('admin/login');
     }
 
     /**

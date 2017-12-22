@@ -19,15 +19,14 @@ Route::get('/', function () {
 Route::get('set_admin', 'Admin\AuthenticateController@set_admin');
 
 
-Route::get('admin/index', function () {
-    return view('admin.index');
-});
-
-
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+
     Route::get('login', 'AuthenticateController@showLoginForm');
     Route::post('login', 'AuthenticateController@login');
-    Route::post('logout', 'AuthenticateController@logout');
+    Route::get('logout', 'AuthenticateController@logout');
     Route::post('verify_code', 'AuthenticateController@verify_code');
     Route::post('reset_password', 'AuthenticateController@reset_password');
+
+    Route::get('/', 'IndexController@index');
+
 });

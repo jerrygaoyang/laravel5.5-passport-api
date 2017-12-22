@@ -71,7 +71,11 @@
                 'password': $('#password').val()
             },
             success: function (res) {
-                console.log(res)
+                if (res.code === 0) {
+                    location.href = '/admin';
+                } else {
+                    layer.msg('账号或密码错误', {icon: 2});
+                }
             }
         })
     }

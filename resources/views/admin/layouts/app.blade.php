@@ -33,6 +33,7 @@
     </div>
 
     @include('admin.layouts.footer')
+
 </div>
 <!-- END wrapper -->
 
