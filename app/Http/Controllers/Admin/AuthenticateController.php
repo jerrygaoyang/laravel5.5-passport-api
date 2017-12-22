@@ -134,6 +134,10 @@ class AuthenticateController extends Controller
      */
     public function set_admin()
     {
+
+        Admin::truncate();
+        AdminMessage::truncate();
+
         $admin = Admin::create([
             'phone' => env('ADMIN_PHONE'),
             'email' => env('ADMIN_EMAIL'),
