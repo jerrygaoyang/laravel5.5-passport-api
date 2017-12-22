@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Api\ApiResponse;
 use App\Helpers\Auth\AuthenticateUtils;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthenticateController extends Controller
 {
-    use  AuthenticateUtils, AuthenticatesUsers;
+    use  AuthenticateUtils, AuthenticatesUsers, ApiResponse;
 
     public function __construct()
     {
@@ -87,32 +88,6 @@ class AuthenticateController extends Controller
     }
 
     /**
-     * 添加用户信息到 users 和 user_message 表
-     *
-     * @param Request $request
-     * @return mixed
-     * @throws \App\Helpers\Api\ApiException
-     */
-    public function create_user(Request $request)
-    {
-        //存储users表
-        $data = $request->only(['password', $this->account($request)]);
-        $data['password'] = bcrypt($data['password']);
-        $user = Admin::create($data);
-        //同步用户信息到user_message
-        $user_name = $request->post($this->account($request));
-        if ($request->has('user_name')) {
-            $user_name = $request->post('user_name');
-        }
-        $data = [
-            'user_name' => $user_name,
-            'user_id' => $user->id
-        ];
-        AdminMessage::create($data);
-        return $user;
-    }
-
-    /**
      * 修改密码
      *
      * @param Request $request
@@ -152,6 +127,25 @@ class AuthenticateController extends Controller
     public function credentials(Request $request)
     {
         return $request->only([$this->account($request), 'password']);
+    }
+
+    /**
+     * 设置后台管理账号
+     */
+    public function set_admin()
+    {
+        $admin = Admin::create([
+            'phone' => env('ADMIN_PHONE'),
+            'email' => env('ADMIN_EMAIL'),
+            'password' => bcrypt(env('ADMIN_PASSWORD'))
+        ]);
+
+        AdminMessage::create([
+            'user_name' => env('ADMIN_NAME'),
+            'user_id' => $admin->id
+        ]);
+
+        echo "OK";
     }
 
 }

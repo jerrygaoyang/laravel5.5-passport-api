@@ -178,6 +178,7 @@ class AuthenticateController extends Controller
      *
      * @param Request $request
      * @return mixed
+     * @throws ApiException
      */
     protected function attemptLogin(Request $request)
     {

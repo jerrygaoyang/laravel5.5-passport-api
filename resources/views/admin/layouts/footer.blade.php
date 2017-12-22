@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: gaoyang
- * Date: 2017/12/22
- * Time: 9:40
- */
+<footer class="footer">
+    2016 - 2017 © Minton <span class="hide-phone">- Coderthemes.com</span>
+</footer>

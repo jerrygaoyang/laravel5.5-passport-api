@@ -1,21 +1,65 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon_1.ico') }}">
+
+    <title>后台管理</title>
+
+    <link href="{{ asset('admin/plugins/switchery/switchery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('admin/assets/js/modernizr.min.js') }}"></script>
 </head>
-<body>
 
-@include('admin.layouts.header')
 
-@section('content')
-暂无内容
-@endsection
+<body class="fixed-left">
 
-@include('admin.layouts.footer')
+<!-- Begin page -->
+<div id="wrapper">
+
+    @include('admin.layouts.header')
+
+    @include('admin.layouts.menu')
+
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            @yield('content')
+        </div>
+        <!-- end content -->
+    </div>
+
+    @include('admin.layouts.footer')
+</div>
+<!-- END wrapper -->
+
+<!-- Plugins  -->
+<script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/popper.min.js') }}"></script><!-- Popper for Bootstrap -->
+<script src="{{ asset('admin/assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/detect.js') }}"></script>
+<script src="{{ asset('admin/assets/js/fastclick.js') }}"></script>
+<script src="{{ asset('admin/assets/js/jquery.slimscroll.js') }}"></script>
+<script src="{{ asset('admin/assets/js/jquery.blockUI.js') }}"></script>
+<script src="{{ asset('admin/assets/js/waves.js') }}"></script>
+<script src="{{ asset('admin/assets/js/wow.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('admin/assets/js/jquery.scrollTo.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/switchery/switchery.min.js') }}"></script>
+
+<!-- Custom main Js -->
+<script src="{{ asset('admin/assets/js/jquery.core.js') }}"></script>
+<script src="{{ asset('admin/assets/js/jquery.app.js') }}"></script>
+
+
+<script>
+    var resizefunc = [];
+</script>
+
+@yield('script')
 
 </body>
 </html>

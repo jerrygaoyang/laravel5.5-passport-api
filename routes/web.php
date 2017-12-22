@@ -16,6 +16,14 @@ Route::get('/', function () {
 });
 
 
+Route::get('set_admin', 'Admin\AuthenticateController@set_admin');
+
+
+Route::get('admin/index', function () {
+    return view('admin.index');
+});
+
+
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('login', 'AuthenticateController@showLoginForm');
     Route::post('login', 'AuthenticateController@login');
