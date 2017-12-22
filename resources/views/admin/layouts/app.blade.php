@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon_1.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('vendor/admin/assets/images/favicon_1.ico') }}">
 
     <title>后台管理</title>
 
-    <link href="{{ asset('admin/plugins/switchery/switchery.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('admin/assets/js/modernizr.min.js') }}"></script>
+    <link href="{{ asset('vendor/admin/plugins/switchery/switchery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('vendor/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('vendor/admin/assets/js/modernizr.min.js') }}"></script>
 </head>
 
 
@@ -37,22 +37,25 @@
 <!-- END wrapper -->
 
 <!-- Plugins  -->
-<script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/popper.min.js') }}"></script><!-- Popper for Bootstrap -->
-<script src="{{ asset('admin/assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/detect.js') }}"></script>
-<script src="{{ asset('admin/assets/js/fastclick.js') }}"></script>
-<script src="{{ asset('admin/assets/js/jquery.slimscroll.js') }}"></script>
-<script src="{{ asset('admin/assets/js/jquery.blockUI.js') }}"></script>
-<script src="{{ asset('admin/assets/js/waves.js') }}"></script>
-<script src="{{ asset('admin/assets/js/wow.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/jquery.nicescroll.js') }}"></script>
-<script src="{{ asset('admin/assets/js/jquery.scrollTo.min.js') }}"></script>
-<script src="{{ asset('admin/plugins/switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/popper.min.js') }}"></script><!-- Popper for Bootstrap -->
+<script src="{{ asset('vendor/admin/assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/detect.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/fastclick.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.slimscroll.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.blockUI.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/waves.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/wow.min.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.scrollTo.min.js') }}"></script>
+<script src="{{ asset('vendor/admin/plugins/switchery/switchery.min.js') }}"></script>
+
+<!-- layer -->
+<script src="{{ asset('vendor/layer/layer.js') }}"></script>
 
 <!-- Custom main Js -->
-<script src="{{ asset('admin/assets/js/jquery.core.js') }}"></script>
-<script src="{{ asset('admin/assets/js/jquery.app.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.core.js') }}"></script>
+<script src="{{ asset('vendor/admin/assets/js/jquery.app.js') }}"></script>
 
 
 <script>

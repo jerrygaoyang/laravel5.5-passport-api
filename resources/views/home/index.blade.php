@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Coderthemes">
-    <link rel="shortcut icon" href="{{asset('home/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('vendor/home/images/favicon.ico')}}">
 
     <title>Minton - Responsive Admin Dashboard & Frontend</title>
 
@@ -14,16 +14,16 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('home/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/home/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Animate -->
-    <link href="{{ asset('home/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/home/css/animate.css') }}" rel="stylesheet">
 
     <!-- Icon-font -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/home/css/themify-icons.css') }}">
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('home/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/home/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -190,7 +190,7 @@
             </div>
 
             <div class="col-sm-6">
-                <img src="{{ asset('home/images/mac.png') }}" class="img-fluid">
+                <img src="{{ asset('vendor/home/images/mac.png') }}" class="img-fluid">
             </div>
 
         </div>
@@ -205,7 +205,7 @@
         <div class="row">
 
             <div class="col-md-5">
-                <img src="{{ asset('home/images/tab2.png') }}" class="img-fluid screen-space">
+                <img src="{{ asset('vendor/home/images/tab2.png') }}" class="img-fluid screen-space">
             </div>
 
             <div class="col-md-6 ml-auto">
@@ -470,18 +470,18 @@
 </footer>
 
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{ asset('home/js/jquery.min.js') }}"></script>
-<script src="{{ asset('home/js/popper.min.js') }}"></script>
-<script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/home/js/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/home/js/popper.min.js') }}"></script>
+<script src="{{ asset('vendor/home/js/bootstrap.min.js') }}"></script>
 <!-- Jquery easing -->
-<script src="{{ asset('home/js/jquery.easing.1.3.min.js') }}"></script>
-<script src="{{ asset('home/js/SmoothScroll.js') }}"></script>
-<script src="{{ asset('home/js/wow.min.js') }}"></script>
-<script src="{{ asset('home/js/jquery.waypoints.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('home/js/jquery.counterup.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('vendor/home/js/jquery.easing.1.3.min.js') }}"></script>
+<script src="{{ asset('vendor/home/js/SmoothScroll.js') }}"></script>
+<script src="{{ asset('vendor/home/js/wow.min.js') }}"></script>
+<script src="{{ asset('vendor/home/js/jquery.waypoints.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('vendor/home/js/jquery.counterup.min.js') }}" type="text/javascript"></script>
 
 <!--common script for all pages-->
-<script src="{{ asset('home/js/jquery.app.js') }}"></script>
+<script src="{{ asset('vendor/home/js/jquery.app.js') }}"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {

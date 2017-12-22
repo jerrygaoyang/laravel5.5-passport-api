@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>后台管理</title>
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon_1.ico') }}">
-    <link href="{{ asset('admin/plugins/switchery/switchery.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
+    <link rel="shortcut icon" href="{{ asset('vendor/admin/assets/images/favicon_1.ico') }}">
+    <link href="{{ asset('vendor/admin/plugins/switchery/switchery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('vendor/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('vendor/admin/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/layer/layer.js') }}"></script>
 </head>
 <body>
 
@@ -62,7 +63,7 @@
 <script>
     function login() {
         $.ajax({
-            url: '/admin/login',
+            url: '/vendor/admin/login',
             type: 'post',
             dataType: 'json',
             data: {
