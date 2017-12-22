@@ -63,7 +63,7 @@
 <script>
     function login() {
         $.ajax({
-            url: '/vendor/admin/login',
+            url: '/admin/login',
             type: 'post',
             dataType: 'json',
             data: {
