@@ -1,4 +1,4 @@
-# laravel passport api auth
+# laravel passport api auth and admin auth
 
 ### 说明
 
@@ -16,7 +16,7 @@
 
 > cd laravel5.5-passport-api
 
-> cp .env.example .env    (配置好数据库,以及APP_URL)
+> cp .env.example .env    (1: 配置好数据库; 2: 配置 APP_URL; 3: 配置 ADMIN 账号信息)
 
 > composer install 
 
@@ -25,6 +25,8 @@
 > php artisan migrate
 
 > php artisan passport:install
+
+> php artisan admin:reset
 
 
 ### 接口文档
