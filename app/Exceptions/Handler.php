@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Helpers\Api\ApiResponse;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Api\ApiException;
 use Illuminate\Validation\ValidationException;
@@ -54,6 +55,10 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof ApiException) {
             return $this->failed($exception->getMessage());
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return redirect('admin/login');
         }
 
         if ($exception instanceof ValidationException) {

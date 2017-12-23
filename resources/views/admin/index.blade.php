@@ -7,11 +7,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Starter</h4>
+                    <h4 class="page-title">产品列表</h4>
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a href="#">Minton</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item"><a href="#">IOT套件</a></li>
+                        <li class="breadcrumb-item active">产品管理</li>
                     </ol>
                     <div class="clearfix"></div>
                 </div>
@@ -38,10 +38,10 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Actions</th>
+                                <th>产品名称</th>
+                                <th>产品简介</th>
+                                <th>产品类型</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>

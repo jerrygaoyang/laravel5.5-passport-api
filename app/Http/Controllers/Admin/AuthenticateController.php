@@ -16,11 +16,6 @@ class AuthenticateController extends Controller
 {
     use  AuthenticateUtils, AuthenticatesUsers, ApiResponse;
 
-    public function __construct()
-    {
-        $this->middleware('auth:api')->only(['logout']);
-    }
-
     public function showLoginForm()
     {
         return view('admin.auth.login');
@@ -80,7 +75,7 @@ class AuthenticateController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
+        $this->guard()->logout();
 
         $request->session()->invalidate();
 

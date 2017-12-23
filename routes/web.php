@@ -27,6 +27,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::post('verify_code', 'AuthenticateController@verify_code');
     Route::post('reset_password', 'AuthenticateController@reset_password');
 
-    Route::get('/', 'IndexController@index');
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/', 'IndexController@index');
+    });
 
 });
