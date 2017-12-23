@@ -124,27 +124,4 @@ class AuthenticateController extends Controller
         return $request->only([$this->account($request), 'password']);
     }
 
-    /**
-     * 设置后台管理账号
-     */
-    public function set_admin()
-    {
-
-        Admin::truncate();
-        AdminMessage::truncate();
-
-        $admin = Admin::create([
-            'phone' => env('ADMIN_PHONE'),
-            'email' => env('ADMIN_EMAIL'),
-            'password' => bcrypt(env('ADMIN_PASSWORD'))
-        ]);
-
-        AdminMessage::create([
-            'user_name' => env('ADMIN_NAME'),
-            'user_id' => $admin->id
-        ]);
-
-        echo "OK";
-    }
-
 }
