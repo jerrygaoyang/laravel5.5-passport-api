@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f08ee52e9f5ad238c9815658da89f232",
+    "content-hash": "dfb2fb9c8518c77beaac7d7bf38d9875",
     "packages": [
+        {
+            "name": "codeforyou/ali",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jerrygaoyang/codeforyou.git",
+                "reference": "af3a6ee5c67080d42483e22f4dfcc08f608ccb70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/jerrygaoyang/codeforyou/af3a6ee5c67080d42483e22f4dfcc08f608ccb70.zip",
+                "reference": "af3a6ee5c67080d42483e22f4dfcc08f608ccb70",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Codeforyou\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "gaoyang"
+                }
+            ],
+            "description": "Aliyun SDK for PHP",
+            "homepage": "https://www.aliyun.com",
+            "keywords": [
+                "aliyun",
+                "sdk"
+            ],
+            "time": "2017-12-26T02:41:03+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.1.0",

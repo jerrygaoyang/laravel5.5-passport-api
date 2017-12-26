@@ -11,6 +11,7 @@
     <link href="{{ asset('vendor/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/admin/assets/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/admin/assets/css/style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/admin/assets/css/my_style.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('vendor/admin/assets/js/modernizr.min.js') }}"></script>
 </head>
 

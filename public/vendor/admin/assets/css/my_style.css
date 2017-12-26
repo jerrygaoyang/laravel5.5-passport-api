@@ -1,0 +1,8 @@
+.my-handle {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.my-handle:last-child {
+    margin-right: 0;
+}

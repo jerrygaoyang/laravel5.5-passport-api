@@ -32,7 +32,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
-
+                        <li><a href="{{ url('admin/iot/product') }}">产品列表</a></li>
                     </ul>
                 </li>
 
