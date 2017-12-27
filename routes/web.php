@@ -65,6 +65,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 Route::resource('device', 'Device\DeviceController');
 
 
+/**
+ * 微信
+ */
+Route::any('/wechat', 'WeChat\ServeController@index');
+
+
+Route::get('test',function (){
+    print_r(str_random(32));
+    echo "<br>";
+    print_r(str_random(43));
+});
+
+
 
 
 
