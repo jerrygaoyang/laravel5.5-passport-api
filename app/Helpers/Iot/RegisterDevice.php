@@ -14,7 +14,7 @@ use Codeforyou\ali\Iot\RegisterDeviceRequest;
 
 class RegisterDevice
 {
-    public static function execute($ProductKey, $DeviceName)
+    public static function execute($ProductKey, $DeviceName = null)
     {
         $request = IotRequest::combine(new RegisterDeviceRequest());
 

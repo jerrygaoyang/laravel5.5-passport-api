@@ -43,7 +43,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
-
+                        <li><a href="{{ url('admin/iot/device') }}">设备列表</a></li>
                     </ul>
                 </li>
 

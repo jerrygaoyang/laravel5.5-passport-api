@@ -20,9 +20,15 @@ Route::get('/', function () {
 });
 
 
+/**
+ * 后台管理账号重置
+ */
 Route::get('set_admin', 'Admin\AuthenticateController@set_admin');
 
 
+/**
+ * 后台管理
+ */
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
     /**
@@ -46,14 +52,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
          */
         Route::group(['namespace' => 'Iot', 'prefix' => 'iot'], function () {
             Route::resource('product', 'ProductController');
+            Route::resource('device', 'DeviceController');
         });
-
     });
 
 });
 
-Route::get('test', function () {
 
-    $res = UpdateProduct::execute('Sg9v4gXcIEG','test3', 'test3');
-    var_dump($res);
-});
+/**
+ * 给予硬件设备端提供的接口
+ */
+Route::resource('device', 'Device\DeviceController');
+
+
+
+
+
