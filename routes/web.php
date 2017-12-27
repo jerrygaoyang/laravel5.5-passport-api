@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('home.index');
 });
 
+/**
+ * 微信
+ */
+Route::any('/wechat', 'WeChat\ServeController@index');
+
 
 /**
  * 后台管理账号重置
@@ -65,10 +70,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 Route::resource('device', 'Device\DeviceController');
 
 
-/**
- * 微信
- */
-Route::any('/wechat', 'WeChat\ServeController@index');
+
 
 
 Route::get('test',function (){
