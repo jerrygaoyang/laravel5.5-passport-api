@@ -15,6 +15,7 @@ class ServeController extends Controller
         $app = app('wechat.official_account');
 
         $app->server->push(function ($message) {
+            Log::info($message);
             return "欢迎关注 高杨！";
         });
 
