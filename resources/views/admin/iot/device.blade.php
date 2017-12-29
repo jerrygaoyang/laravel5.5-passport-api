@@ -69,9 +69,7 @@
                             </tbody>
                         </table>
 
-                        <div class="card-body">
-                            {{ $devices->links() }}
-                        </div>
+                        {{ $devices->links() }}
 
                     </div>
                 </div>
