@@ -30,7 +30,7 @@ Route::group(['namespace' => 'Wechat'], function () {
 /**
  * 后台管理账号重置
  */
-Route::get('set_admin', 'Admin\\AuthenticateController@set_admin');
+Route::get('set_admin', 'Admin\AuthenticateController@set_admin');
 
 
 /**

@@ -124,4 +124,17 @@ class AuthenticateController extends Controller
         return $request->only([$this->account($request), 'password']);
     }
 
+    public function set_admin()
+    {
+        Admin::truncate();
+
+        Admin::create([
+            'phone' => env('ADMIN_PHONE'),
+            'email' => env('ADMIN_EMAIL'),
+            'password' => bcrypt(env('ADMIN_PASSWORD'))
+        ]);
+
+        echo "<h1>后台管理密码重置成功!</h1>";
+    }
+
 }
