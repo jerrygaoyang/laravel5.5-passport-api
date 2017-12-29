@@ -11,7 +11,7 @@
     margin-top: 30px;
 }
 
-.pagination .active {
+.pagination .active span{
     color: #fff;
 }
 
