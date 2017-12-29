@@ -28,7 +28,8 @@ class Wechat
      */
     public static function RegisterDevice()
     {
-        $access_token = self::app()->access_token->getToken();
+        $token = self::app()->access_token;
+        $access_token = $token->getToken();
         print_r($access_token);
         $product_id = config('wechat.product.product_id');
         print_r($product_id);
