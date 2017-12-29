@@ -38,6 +38,7 @@ class Wechat
         $query_params = http_build_query($data);
         $url = 'https://api.weixin.qq.com/device/getqrcode?' . $query_params;
         $res = $client->get($url);
-        return $res->getBody();
+//        return $res->getBody();
+        return $url;
     }
 }
