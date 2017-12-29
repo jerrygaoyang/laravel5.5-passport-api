@@ -30,13 +30,9 @@ class Wechat
     {
         $access_token = self::app()->access_token->getToken();
         $product_id = config('wechat.product.product_id');
+        $url = "https://api.weixin.qq.com/device/getqrcode?access_token=$access_token&product_id=$product_id";
+        print_r($url);
         $client = new Client();
-        $data = [
-            'access_token' => $access_token,
-            'product_id' => $product_id
-        ];
-        $query_params = http_build_query($data);
-        $url = 'https://api.weixin.qq.com/device/getqrcode?' . $query_params;
         $res = $client->get($url);
 
         return $res->getBody();
