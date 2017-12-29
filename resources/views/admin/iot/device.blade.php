@@ -50,10 +50,10 @@
                             <tbody>
                             @foreach($devices as $device)
                                 <tr>
-                                    <td>{{ $device->device_mac }}</td>
-                                    <td>{{ $device->device_name }}</td>
                                     <td>{{ $device->device_id }}</td>
                                     <td>{{ $device->product_key }}</td>
+                                    <td>{{ $device->device_name }}</td>
+                                    <td>{{ $device->device_mac }}</td>
                                     <td>
                                         <a class="on-default edit-row my-handle"
                                            data-toggle="tooltip" data-placement="top" data-original-title="编辑">
