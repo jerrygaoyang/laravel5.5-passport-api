@@ -40,10 +40,10 @@
                         <table class="table table-bordered" id="datatable-editable">
                             <thead>
                             <tr>
-                                <th>设备名称</th>
+                                <th>IOT设备 ID</th>
+                                <th>IOT产品 Key</th>
+                                <th>微信设备 ID</th>
                                 <th>设备 Mac</th>
-                                <th>设备 ID</th>
-                                <th>产品 Key</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -90,10 +90,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="device_name">设备名称</label>
-                        <input id="device_name" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <label for="device_mac">设备 Mac</label>
                         <input id="device_mac" type="text" class="form-control">
                     </div>
@@ -120,7 +116,6 @@
     <script>
         function create() {
             var data = {
-                'device_name': $('#device_name').val(),
                 'device_mac': $('#device_mac').val(),
                 'product_key': $('#product_key').val()
             };

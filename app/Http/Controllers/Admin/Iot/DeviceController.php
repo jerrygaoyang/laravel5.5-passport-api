@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\iot;
 
 use App\Helpers\Api\ApiResponse;
 use App\Helpers\Iot\RegisterDevice;
+use App\Helpers\Wechat\Wechat;
 use App\Models\IotDevice;
 use App\Models\IotProduct;
 use Illuminate\Http\Request;
@@ -43,14 +44,20 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $device_name = $request->post('device_name');
         $device_mac = $request->post('device_mac');
         $product_key = $request->post('product_key');
 
         /**
+         * 去微信云注册设备
+         */
+        $res = Wechat::RegisterDevice();
+        $wx_device_id = $res['deviceid'];
+        $qrticket = $res['qrticket'];
+
+        /**
          * 去阿里iot套件云注册设备
          */
-        $register_device = RegisterDevice::execute($product_key, $device_name);
+        $register_device = RegisterDevice::execute($product_key, $wx_device_id);
 
         /**
          * 设备信息同步到本地服务器
@@ -60,6 +67,7 @@ class DeviceController extends Controller
             'device_name' => $register_device['DeviceName'],
             'device_secret' => $register_device['DeviceSecret'],
             'device_mac' => $device_mac,
+            'device_qrticket' => $qrticket,
             'product_key' => $product_key
         ]);
 
