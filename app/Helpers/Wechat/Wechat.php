@@ -34,8 +34,13 @@ class Wechat
         print_r($product_id);
         $url = "https://api.weixin.qq.com/device/getqrcode?access_token=$access_token&product_id=$product_id";
         print_r($url);
+
         $client = new Client();
         $res = $client->request('GET', $url);
+
+        echo "<br>";
+        echo $res->getBody();
+        echo "<br>";
 
         return $res->getBody();
     }
