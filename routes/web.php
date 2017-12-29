@@ -14,6 +14,7 @@
 use App\Helpers\Iot\CreateProduct;
 use App\Helpers\Iot\RegisterDevice;
 use App\Helpers\Iot\UpdateProduct;
+use App\Helpers\Wechat\Wechat;
 
 Route::get('/', function () {
     return view('home.index');
@@ -79,7 +80,7 @@ Route::get('test', function () {
     echo "<br>";
     print_r(str_random(43));
     echo "<br>";
-    $res = \App\Helpers\Wechat\Wechat::RegisterDevice();
+    $res = Wechat::RegisterDevice();
     print_r($res);
 });
 
