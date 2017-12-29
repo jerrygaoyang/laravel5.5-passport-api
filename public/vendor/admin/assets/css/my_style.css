@@ -8,10 +8,10 @@
 }
 
 .pagination {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .pagination > li > span, .pagination > li > a {
-    padding: 10px 15px;
+    padding: 8px 18px;
     border: 1px solid #ddd;
 }
