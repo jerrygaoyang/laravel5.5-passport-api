@@ -35,6 +35,6 @@ class Wechat
         $client = new Client();
         $res = $client->request('GET', $url);
 
-        return json_decode($res->getBody());
+        return json_decode($res->getBody(), true);
     }
 }
