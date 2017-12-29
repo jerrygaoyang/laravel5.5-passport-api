@@ -78,6 +78,9 @@ Route::get('test', function () {
     print_r(str_random(32));
     echo "<br>";
     print_r(str_random(43));
+    echo "<br>";
+    $res = \App\Helpers\Wechat\Wechat::RegisterDevice();
+    print_r($res);
 });
 
 

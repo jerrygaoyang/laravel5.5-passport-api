@@ -134,4 +134,8 @@ return [
     //        //...
     //    ],
     // ],
+
+    'product' => [
+        'product_id' => env('WECHAT_PRODUCT_ID', '')
+    ]
 ];
