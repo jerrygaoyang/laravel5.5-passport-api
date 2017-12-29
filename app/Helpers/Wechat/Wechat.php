@@ -24,7 +24,7 @@ class Wechat
 
     /**
      * 微信注册设备
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\StreamInterface
      */
     public static function RegisterDevice()
     {
@@ -38,6 +38,6 @@ class Wechat
         $query_params = http_build_query($data);
         $url = 'https://api.weixin.qq.com/device/getqrcode?' . $query_params;
         $res = $client->get($url);
-        return $res;
+        return $res->getBody();
     }
 }
