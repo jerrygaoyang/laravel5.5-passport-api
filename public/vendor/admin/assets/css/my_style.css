@@ -7,7 +7,7 @@
     margin-right: 0;
 }
 
-.pagination > li {
+.pagination > li > span, .pagination > li > a {
     padding: 5px 10px;
     border: 1px solid #ddd;
 }
