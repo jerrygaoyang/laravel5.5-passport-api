@@ -11,9 +11,6 @@
 |
 */
 
-use App\Helpers\Iot\CreateProduct;
-use App\Helpers\Iot\RegisterDevice;
-use App\Helpers\Iot\UpdateProduct;
 use App\Helpers\Wechat\Wechat;
 
 Route::get('/', function () {
@@ -33,7 +30,7 @@ Route::group(['namespace' => 'Wechat'], function () {
 /**
  * 后台管理账号重置
  */
-Route::get('set_admin', 'Admin\AuthenticateController@set_admin');
+Route::get('set_admin', 'Admin\\AuthenticateController@set_admin');
 
 
 /**
