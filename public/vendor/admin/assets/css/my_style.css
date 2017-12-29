@@ -6,3 +6,8 @@
 .my-handle:last-child {
     margin-right: 0;
 }
+
+.pagination > li > a {
+    padding: 5px;
+    border: 1px solid #ddd;
+}
