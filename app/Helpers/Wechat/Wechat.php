@@ -29,19 +29,12 @@ class Wechat
     public static function RegisterDevice()
     {
         $access_token = self::app()->access_token->getToken()['access_token'];
-        print_r($access_token);
         $product_id = config('wechat.product.product_id');
-        print_r($product_id);
         $url = "https://api.weixin.qq.com/device/getqrcode?access_token=$access_token&product_id=$product_id";
-        print_r($url);
 
         $client = new Client();
         $res = $client->request('GET', $url);
 
-        echo "<br>";
-        echo $res->getBody();
-        echo "<br>";
-
-        return $res->getBody();
+        return json_decode($res->getBody());
     }
 }

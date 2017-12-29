@@ -19,6 +19,7 @@ class CreateIotDeviceTable extends Migration
             $table->string('device_name');
             $table->string('device_secret');
             $table->string('device_mac');
+            $table->string('device_qrticket')->nullable();
             $table->string('product_key');
             $table->timestamps();
         });
