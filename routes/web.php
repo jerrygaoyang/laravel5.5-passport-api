@@ -73,9 +73,11 @@ Route::resource('device', 'Device\DeviceController');
 
 
 Route::get('test', function () {
-    print_r(str_random(32));
-    echo "<br>";
-    print_r(str_random(43));
+    $product_key = 'u1UMPuLIF2K';
+    $message_content = json_encode(['open' => 1]);
+    $device_name = 'gh_cf290b2808a4_84605a227c2103e3';
+    $res = \App\Helpers\Iot\PubToTopic::execute($product_key, $message_content, $device_name);
+    var_dump($res);
 });
 
 
