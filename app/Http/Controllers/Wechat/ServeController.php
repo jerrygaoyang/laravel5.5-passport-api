@@ -27,7 +27,7 @@ class ServeController extends Controller
                     return '你操作了我！';
                 }
             }
-            
+
         });
 
         return Wechat::app()->server->serve();
