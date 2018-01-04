@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIotDeviceTable extends Migration
+class CreateMnsDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateIotDeviceTable extends Migration
      */
     public function up()
     {
-        Schema::create('iot_device', function (Blueprint $table) {
+        Schema::create('mns_data', function (Blueprint $table) {
             $table->increments('id');
             $table->string('device_id');
-            $table->string('device_name');
-            $table->string('device_secret');
-            $table->string('device_mac');
-            $table->string('device_qrticket')->nullable();
-            $table->string('product_key');
-            $table->string('open_id')->nullable();
+            $table->json('device_data');
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ class CreateIotDeviceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('iot_device');
+        Schema::dropIfExists('mns_data');
     }
 }

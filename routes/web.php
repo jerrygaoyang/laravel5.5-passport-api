@@ -11,8 +11,6 @@
 |
 */
 
-use App\Helpers\Wechat\Wechat;
-
 Route::get('/', function () {
     return view('home.index');
 });
@@ -73,11 +71,22 @@ Route::resource('device', 'Device\DeviceController');
 
 
 Route::get('test', function () {
-    $product_key = 'u1UMPuLIF2K';
-    $message_content = json_encode(['open' => 1]);
-    $device_name = 'gh_cf290b2808a4_84605a227c2103e3';
-    $res = \App\Helpers\Iot\PubToTopic::execute($product_key, $message_content, $device_name);
-    var_dump($res);
+    $res = \App\Helpers\Mns\BatchReceiveMessage::execute('aliyun-iot-NGwj3AALJOF');
+    if ($res) {
+        var_dump($res);
+        $messages = $res->getMessages();
+        $receiptHandles = [];
+        foreach ($messages as $message) {
+            $body = $message->getMessageBody();
+            $receiptHandle = $message->getReceiptHandle();
+            echo $body;
+            $receiptHandles[] = $receiptHandle;
+        }
+        $res = \App\Helpers\Mns\BatchDeleteMessage::execute('aliyun-iot-NGwj3AALJOF', $receiptHandles);
+        var_dump($res);
+    } else {
+        echo 'null';
+    }
 });
 
 

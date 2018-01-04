@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "codeforyou/ali",
-            "version": "1.1.2",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jerrygaoyang/codeforyou.git",
-                "reference": "05eea945f152b6667d57d2fac89881236caff881"
+                "reference": "4048059d4762de3ccd17b66002e7cbb978ede75b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/jerrygaoyang/codeforyou/05eea945f152b6667d57d2fac89881236caff881.zip",
-                "reference": "05eea945f152b6667d57d2fac89881236caff881",
+                "url": "https://files.phpcomposer.com/files/jerrygaoyang/codeforyou/4048059d4762de3ccd17b66002e7cbb978ede75b.zip",
+                "reference": "4048059d4762de3ccd17b66002e7cbb978ede75b",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "aliyun",
                 "sdk"
             ],
-            "time": "2018-01-02T03:33:05+00:00"
+            "time": "2018-01-03T09:46:07+00:00"
         },
         {
             "name": "defuse/php-encryption",
