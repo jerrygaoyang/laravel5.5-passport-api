@@ -22,7 +22,7 @@ class ServeController extends Controller
             } else {
                 $res = $this->unbind($message);
                 if ($res) {
-                    return '你操作了我！';
+                    return $res;
                 } else {
                     return '你操作了我！';
                 }
