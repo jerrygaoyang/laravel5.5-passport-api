@@ -44,6 +44,13 @@ class DeviceController extends Controller
         $device_mac = $request->post('device_mac');
         $product_key = $request->post('product_key');
 
+        $device = IotDevice::where('device_mac', $device_mac)
+            ->where('product_key', $product_key)
+            ->first();
+        if ($device) {
+            return $this->success($device);
+        }
+
         /**
          * 去微信云注册设备
          */
