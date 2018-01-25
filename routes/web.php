@@ -64,7 +64,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
          *  房屋管理界面操作
          */
         Route::group(['namespace' => 'house', 'prefix' => 'house'], function () {
-            Route::resource('area', 'AreaController');
+            Route::resource('area', 'HouseAreaController');
+            Route::resource('info', 'HouseInfoController');
         });
     });
 
@@ -75,6 +76,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
  * 给予硬件设备端提供的接口
  */
 Route::resource('device', 'Device\DeviceController');
+
+
+Route::get('test', function () {
+    \App\Models\HouseInfo::create([
+        'house_acreage' => '100',
+        'house_address' => '上海-xxx-xxx-xxx',
+        'rent_price' => '10000',
+        'house_date_start' => '2018-1-1',
+        'house_date_end' => '2019-1-1',
+        'house_decoration' => 'WIFI',
+        'is_rent' => false
+    ]);
+});
 
 
 
