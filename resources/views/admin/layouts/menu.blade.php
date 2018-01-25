@@ -23,6 +23,19 @@
                     </ul>
                 </li>
 
+                <li class="menu-title">房源信息</li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect waves-primary">
+                        <i class="ti-menu-alt"></i>
+                        <span> 房屋管理 </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url('admin/house/area') }}">小区列表</a></li>
+                    </ul>
+                </li>
+
                 <li class="menu-title">IOT套件</li>
 
                 <li class="has_sub">

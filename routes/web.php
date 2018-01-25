@@ -59,6 +59,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
             Route::resource('product', 'ProductController');
             Route::resource('device', 'DeviceController');
         });
+
+        /**
+         *  房屋管理界面操作
+         */
+        Route::group(['namespace' => 'house', 'prefix' => 'house'], function () {
+            Route::resource('area', 'AreaController');
+        });
     });
 
 });
@@ -68,26 +75,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
  * 给予硬件设备端提供的接口
  */
 Route::resource('device', 'Device\DeviceController');
-
-
-Route::get('test', function () {
-    $res = \App\Helpers\Mns\BatchReceiveMessage::execute('aliyun-iot-NGwj3AALJOF');
-    if ($res) {
-        var_dump($res);
-        $messages = $res->getMessages();
-        $receiptHandles = [];
-        foreach ($messages as $message) {
-            $body = $message->getMessageBody();
-            $receiptHandle = $message->getReceiptHandle();
-            echo $body;
-            $receiptHandles[] = $receiptHandle;
-        }
-        $res = \App\Helpers\Mns\BatchDeleteMessage::execute('aliyun-iot-NGwj3AALJOF', $receiptHandles);
-        var_dump($res);
-    } else {
-        echo 'null';
-    }
-});
 
 
 
