@@ -37,34 +37,96 @@
                             <tr>
                                 <th>房间</th>
                                 <th>用户</th>
+                                <th>手机</th>
                                 <td>开门时间</td>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>上海-xxx-xxx-xxx 1001室</td>
                                 <td>高杨</td>
+                                <td>18888888888</td>
                                 <td>2018-1-3 19:23</td>
+                                <td>
+                                    <a href="#"
+                                       class="on-default edit-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="编辑">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a onclick="" class="on-default remove-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>上海-xxx-xxx-xxx 1002室</td>
                                 <td>小明</td>
+                                <td>18888888888</td>
                                 <td>2018-1-2 16:23</td>
+                                <td>
+                                    <a href="#"
+                                       class="on-default edit-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="编辑">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a onclick="" class="on-default remove-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>上海-xxx-xxx-xxx 1003室</td>
                                 <td>张三</td>
+                                <td>18888888888</td>
                                 <td>2018-1-1 20:21</td>
+                                <td>
+                                    <a href="#"
+                                       class="on-default edit-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="编辑">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a onclick="" class="on-default remove-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>上海-xxx-xxx-xxx 1002室</td>
                                 <td>小明</td>
+                                <td>18888888888</td>
                                 <td>2018-1-1 19:15</td>
+                                <td>
+                                    <a href="#"
+                                       class="on-default edit-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="编辑">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a onclick="" class="on-default remove-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>上海-xxx-xxx-xxx 1001室</td>
                                 <td>高杨</td>
+                                <td>18888888888</td>
                                 <td>2018-12-20 15:23</td>
+                                <td>
+                                    <a href="#"
+                                       class="on-default edit-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="编辑">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a onclick="" class="on-default remove-row my-handle"
+                                       data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
