@@ -69,7 +69,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
-
+                        <li><a href="{{ url('admin/user/info') }}">用户列表</a></li>
                     </ul>
                 </li>
 

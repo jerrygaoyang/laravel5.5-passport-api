@@ -68,6 +68,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
             Route::resource('info', 'HouseInfoController');
             Route::resource('open', 'HouseOpenController');
         });
+
+        /**
+         *  用户管理界面操作
+         */
+        Route::group(['namespace' => 'user', 'prefix' => 'user'], function () {
+            Route::resource('info', 'UserInfoController');
+        });
     });
 
 });
