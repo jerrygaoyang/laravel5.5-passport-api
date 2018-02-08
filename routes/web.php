@@ -66,6 +66,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::group(['namespace' => 'house', 'prefix' => 'house'], function () {
             Route::resource('area', 'HouseAreaController');
             Route::resource('info', 'HouseInfoController');
+            Route::resource('open', 'HouseOpenController');
         });
     });
 

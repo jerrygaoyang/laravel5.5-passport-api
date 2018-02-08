@@ -34,6 +34,7 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ url('admin/house/area') }}">小区列表</a></li>
                         <li><a href="{{ url('admin/house/info') }}">房屋列表</a></li>
+                        <li><a href="{{ url('admin/house/open') }}">开门记录</a></li>
                     </ul>
                 </li>
 
