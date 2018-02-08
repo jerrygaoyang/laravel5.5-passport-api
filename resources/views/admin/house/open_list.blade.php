@@ -35,16 +35,37 @@
                         <table class="table table-bordered" id="datatable-editable">
                             <thead>
                             <tr>
-                                <th>租赁状态</th>
-                                <th>面积（㎡）</th>
-                                <td>价格（元）</td>
-                                <th>地址</th>
-                                <th>空置期</th>
-                                <th>操作</th>
+                                <th>房间</th>
+                                <th>用户</th>
+                                <td>开门时间</td>
                             </tr>
                             </thead>
                             <tbody>
-
+                            <tr>
+                                <td>上海-xxx-xxx-xxx 1001室</td>
+                                <td>高杨</td>
+                                <td>2018-1-3 19:23</td>
+                            </tr>
+                            <tr>
+                                <td>上海-xxx-xxx-xxx 1002室</td>
+                                <td>小明</td>
+                                <td>2018-1-2 16:23</td>
+                            </tr>
+                            <tr>
+                                <td>上海-xxx-xxx-xxx 1003室</td>
+                                <td>张三</td>
+                                <td>2018-1-1 20:21</td>
+                            </tr>
+                            <tr>
+                                <td>上海-xxx-xxx-xxx 1002室</td>
+                                <td>小明</td>
+                                <td>2018-1-1 19:15</td>
+                            </tr>
+                            <tr>
+                                <td>上海-xxx-xxx-xxx 1001室</td>
+                                <td>高杨</td>
+                                <td>2018-12-20 15:23</td>
+                            </tr>
                             </tbody>
                         </table>
 
