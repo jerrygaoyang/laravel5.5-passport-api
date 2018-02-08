@@ -42,8 +42,8 @@
                             <thead>
                             <tr>
                                 <th>租赁状态</th>
-                                <th>面积</th>
-                                <td>价格</td>
+                                <th>面积（㎡）</th>
+                                <td>价格（元）</td>
                                 <th>地址</th>
                                 <th>空置期</th>
                                 <th>操作</th>
