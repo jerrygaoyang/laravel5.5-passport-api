@@ -41,6 +41,7 @@
                         <table class="table table-bordered" id="datatable-editable">
                             <thead>
                             <tr>
+                                <th>租赁状态</th>
                                 <th>面积</th>
                                 <td>价格</td>
                                 <th>地址</th>
@@ -51,6 +52,7 @@
                             <tbody>
                             @foreach($houseinfos as $houseinfo)
                                 <tr>
+                                    <td>@if($houseinfo->is_rent) 已出租 @else 空置 @endif</td>
                                     <td>{{ $houseinfo->house_acreage }}</td>
                                     <td>{{ $houseinfo->rent_price }}</td>
                                     <td>{{ $houseinfo->house_address }}</td>
@@ -61,7 +63,8 @@
                                            data-toggle="tooltip" data-placement="top" data-original-title="编辑">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a onclick="destroy({{ $houseinfo->id }})" class="on-default remove-row my-handle"
+                                        <a onclick="destroy({{ $houseinfo->id }})"
+                                           class="on-default remove-row my-handle"
                                            data-toggle="tooltip" data-placement="top" data-original-title="删除">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
